@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Titre</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: Georgia, serif;
+      color: #3B6E4A;
+      background: #ffffff;
+    }
+
+    /* TITRE */
+    .hero {
+      width: 100%;
+      padding: 80px 30px;
+      background-color: #DCC4A4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero h1 {
+      color: #000000;
+      font-size: 3em;
+      text-align: center;
+    }
+
+    /* SECTIONS TEXTE */
+    .section {
+      max-width: 800px;
+      margin: 60px auto;
+      padding: 0 30px;
+    }
+
+    .section h2 {
+      font-size: 1.8em;
+      margin-bottom: 20px;
+      color: #000000;
+    }
+
+    .section p {
+      font-size: 1.1em;
+      line-height: 1.8;
+      color: #000000;
+    }
+
+    /* GRILLE 3 IMAGES */
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      max-width: 900px;
+      margin: 60px auto;
+      padding: 0 30px;
+    }
+
+   .gallery-2 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  max-width: 620px;
+  margin: 60px auto;
+  padding: 0 30px;
+  justify-content: center;
+}
+
+.gallery-1 {
+  display: flex;
+  justify-content: center;
+  max-width: 900px;
+  margin: 60px auto;
+  padding: 0 30px;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+    .gallery img:hover {
+      opacity: 0.8;
+    }
+
+    /* FOND SOMBRE DU POP-UP */
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.7);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .overlay.active {
+      display: flex;
+    }
+
+    /* BOÎTE DU POP-UP */
+    .popup {
+      background: white;
+      border-radius: 8px;
+      padding: 30px;
+      max-width: 650px;
+      width: 90%;
+      position: relative;
+    }
+
+    .popup img {
+      width: 100%;
+      border-radius: 4px;
+      margin-bottom: 15px;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .popup img:hover {
+      opacity: 0.8;
+    }
+
+    /* LIGHTBOX POUR LES IMAGES DU POP-UP */
+    .lightbox {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(255, 255, 255, 0.9);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .lightbox.active {
+      display: flex;
+    }
+
+    .lightbox-img {
+      max-width: 90%;
+      max-height: 90vh;
+      border-radius: 8px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.5);
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 2.5em;
+      cursor: pointer;
+      color: white;
+    }
+
+    .lightbox-close:hover {
+      color: #ccc;
+    }
+
+    .popup p {
+      font-size: 1em;
+      line-height: 1.6;
+      color: #444;
+    }
+
+    /* BOUTON FERMER */
+    .close {
+      position: absolute;
+      top: 12px; right: 16px;
+      font-size: 1.5em;
+      cursor: pointer;
+      color: #888;
+    }
+
+    .close:hover { color: #222; }
+
+    .image-bloc {
+  width: calc(33.333% - 10px);
+  text-align: center;
+  flex: 0 1 auto;
+}
+
+.image-bloc img {
+  width: 100%;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: opacity 0.2s;
+  aspect-ratio: 3/2;
+  object-fit: cover;
+}
+
+.image-titre {
+  font-size: 1em;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.carte-container {
+  position: relative;
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 0 30px;
+}
+
+.carte-img {
+  width: 100%;
+  border-radius: 6px;
+}
+
+.point {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background: #e74c3c;
+  border: 2px solid white;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.point:hover .point-label {
+  display: block;
+}
+
+.point-label {
+  display: none;
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  border: 1px solid #ccc;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.85em;
+  white-space: nowrap;
+  color: #222;
+}
+
+.gallery-2col {
+  display: flex;
+  gap: 15px;
+  max-width: 900px;
+  margin: 60px auto;
+  padding: 0 30px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.gallery-2col .image-bloc {
+  width: calc(33.333% - 10px);
+}
+
+.gallery .image-bloc:nth-child(3n+1):nth-last-child(2),
+.gallery .image-bloc:nth-child(3n+2):nth-last-child(1) {
+  margin: 0 auto;
+}
+
+/* TEXTE PREVIEW SOUS IMAGE */
+.texte-preview {
+  font-size: 0.95em;
+  line-height: 1.5;
+  color: #3B6E4A;
+  margin-top: 8px;
+  margin-bottom: 0;
+}
+
+.texte-preview .lire-suite {
+  color: #7BB5D4;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.texte-preview .lire-suite:hover {
+  text-decoration: underline;
+}
+
+/* SECTIONS DU POP-UP */
+.popup-section {
+  margin-bottom: 20px;
+}
+
+.popup-subtitle {
+  font-weight: bold;
+  font-size: 1.1em;
+  color: #3B6E4A;
+  margin-bottom: 10px;
+  margin-top: 15px;
+}
+
+.popup-subtitle:first-child {
+  margin-top: 0;
+}
+
+.popup-content {
+  font-size: 1em;
+  line-height: 1.6;
+  color: #444;
+}
+
+.popup-evolution-img {
+  width: 100%;
+  border-radius: 4px;
+  margin-top: 10px;
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- TITRE -->
+  <div class="hero">
+    <h1>Les fours banals</h1>
+  </div>
+
+  <!-- SECTION 1 -->
+  <div class="section">
+    <h2>Un four banal... c'est quoi ? </h2>
+    <p>à ecrire....</p>
+  </div>
+
+  <!-- SECTION 2 -->
+  <div class="section">
+    <h2>Et pourquoi on en parle encore à ce jour?</h2>
+    <p> Alors qu’ils relevaient de l’autorité seigneuriale au Moyen Âge, 
+      les fours banals et toute la culture de céréale en région de montagne avait une importance vitale 
+      et représentait le coeur de la vie sociale. Ces pratiques sont organisés et rendus possibles grâce à des efforts 
+      communautaires majeurs, géré en bien communs. Les fours banal ont vu leur fonction diminué avec l'arrivée des chemins 
+      de fer et les grands changements liées à la modernisation des styles de vie (industrialisation, professionnalisation du 
+      métier de boulanger). À ce moment, des produits en provenance de l'extérieur de la Suisse arrivaient, et pour moins chers. 
+      Cela a mené à une diminution des cultures de blés. Les fours banals qui ont su résister à ce changement sont les plus éloignés,
+       dans les régions difficiles d'accès. C'est seulement vers les années 80-90 que de nombreux fours ont été restaurés, et que les
+        anciens consortages ont repris vie afin de rénover puis faire perdurer les savoirs. À ce jour, leur gestion est assurée par
+         des consortages, associations ou confréries, qui  décident de leur entretien, de leur rénovation 
+         et de leur mise en valeur.
+    </p>
+  </div>
+<!-- CARTE -->
+<div class="carte-container">
+  <img src="images/carte/carte.png" alt="Carte" class="carte-img">
+
+  <!-- POINT 1 -->
+  <a href="#section3" class="point" style="top: 65%; left: 41%;">
+    <span class="point-label">Orsières</span>
+  </a>
+
+  <!-- POINT 2 -->
+  <a href="#section4" class="point" style="top: 54%; left: 70%;">
+    <span class="point-label">Bagnes</span>
+  </a>
+  <!-- POINT 3 -->
+  <a href="#section5" class="point" style="top: 47%; left: 26%;">
+    <span class="point-label">Trient</span>
+  </a>
+
+  <!-- POINT 4 -->
+  <a href="#section6" class="point" style="top: 34%; left: 19%;">
+    <span class="point-label">Finhaut</span>
+  </a>
+
+    <!-- POINT 5 -->
+  <a href="#section7" class="point" style="top: 22%; left: 39%;">
+    <span class="point-label">Martigny</span>
+  </a>
+
+    <!-- POINT 6 -->
+  <a href="#section8" class="point" style="top: 32%; left: 51.5%;">
+    <span class="point-label">Sembrancher</span>
+  </a>
+
+    <!-- POINT 7 -->
+  <a href="#section9" class="point" style="top: 59%; left: 53%;">
+    <span class="point-label">Liddes</span>
+  </a>
+
+    <!-- POINT 8 -->
+  <a href="#section10" class="point" style="top: 23%; left: 18%;">
+    <span class="point-label">Salvan</span>
+  </a>
+
+    <!-- POINT 9 -->
+  <a href="#section11" class="point" style="top: 82%; left: 56%;">
+    <span class="point-label">Bourg Saint-Pierre</span>
+  </a>
+
+</div>
+
+    <!-- SECTION 3 -->
+  <div class="section" id="section3"> 
+    <h2>Orsières</h2>
+  </div>
+
+<!-- GALERIE 12 IMAGES -->
+
+<div class="gallery">
+
+  <div class="image-bloc">
+    <p class="image-titre">La Rosière</p>
+    <img src="images/fours/larosiere.jpg" alt="Image 1"
+         onclick="ouvrirPopup('images/fours/larosiere.jpg', 'Les familles s\'inscrivent à l\'avance pour leur place durant la semaine. Il y a un tournus concernant le nettoyage et le chauffage du four (la personne qui chauffe doit fournir plus de bois). Chaque famille a sa propre recette.', '', 'images/frise/larosiere.png')">
+    <p class="texte-preview">Les familles s'inscrivent à l'avance pour leur place durant la semaine. Il y a un tournus concernant le nettoyage et le chauffage du four... <span class="lire-suite" onclick="ouvrirPopup('images/fours/larosiere.jpg', 'Les familles s\'inscrivent à l\'avance pour leur place durant la semaine. Il y a un tournus concernant le nettoyage et le chauffage du four (la personne qui chauffe doit fournir plus de bois). Chaque famille a sa propre recette.', '', 'images/frise/larosiere.png')">Lire la suite</span></p>
+  </div>
+  <div class="image-bloc">
+    <p class="image-titre">Prassumy</p>
+    <img src="images/fours/aucune_image_.png" alt="Image 2"
+         onclick="ouvrirPopup('images/fours/aucune_image_.png', 'Une transmission orale de génération en génération a lieu. Les traditions se transmettent en voyant les autres le faire. Il y a une quinzaine de cuites par années, organisées par tirage au sort, avec deux consorts par jour. Chaque famille fait sa pâte avec la recette familiale. En général, les dames font les pains et les miches et les hommes chauffent le four et cuisent les pains. ', '', '')">
+    <p class="texte-preview">Une transmission orale de génération en génération a lieu. Les traditions se transmettent en voyant les autres... <span class="lire-suite" onclick="ouvrirPopup('images/fours/aucune_image_.png', 'Une transmission orale de génération en génération a lieu. Les traditions se transmettent en voyant les autres le faire. Il y a une quinzaine de cuites par années, organisées par tirage au sort, avec deux consorts par jour. Chaque famille fait sa pâte avec la recette familiale. En général, les dames font les pains et les miches et les hommes chauffent le four et cuisent les pains. ', '', '')">Lire la suite</span></p>
+  </div>
+  <div class="image-bloc">
+    <p class="image-titre">Soulalex</p>
+    <img src="images/fours/aucune_image_.png" alt="Image 3"
+         onclick="ouvrirPopup('images/fours/aucune_image_.png', 'Le comité qui effectue sa propre recette. Un repas est organisé durant les jours de cuite. Tout le monde peut entrer dans la société, si ceux-ci sont investis et motivés. Il y a une volonté de garder des recettes traditionnelles et ancestrales. Des cartes de commandes sont envoyées à chacun des membres et leurs amis. Tout est vendu dans le magasin.Les cuites ont lieu à Pâques et à la Toussaint', '', '')">
+    <p class="texte-preview">Le comité effectue sa propre recette. Un repas est organisé durant les jours de cuite. Tout le monde peut... <span class="lire-suite" onclick="ouvrirPopup('images/fours/aucune_image_.png', 'Le comité qui effectue sa propre recette. Un repas est organisé durant les jours de cuite. Tout le monde peut entrer dans la société, si ceux-ci sont investis et motivés. Il y a une volonté de garder des recettes traditionnelles et ancestrales. Des cartes de commandes sont envoyées à chacun des membres et leurs amis. Tout est vendu dans le magasin.Les cuites ont lieu à Pâques et à la Toussaint', '', '')">Lire la suite</span></p>
+  </div>
+
+  <div class="image-bloc">
+    <p class="image-titre">Reppaz</p>
+    <img src="images/fours/aucune_image_.png" alt="Image 4"
+         onclick="ouvrirPopup('images/fours/aucune_image_.png', 'Chaque famille s\'organise (recettes, pratiques etc..). Une fois le four allumé, c\'est un tournus de qui l\'utilise. Le four a une capacité de 120 pains. Les fournées ont lieu deux fois par année, soit à la fin avril et à la fin novembre.', '', '')">
+    <p class="texte-preview">Chaque famille s'organise avec ses recettes et pratiques. Une fois le four allumé, c'est un tournus de qui... <span class="lire-suite" onclick="ouvrirPopup('images/fours/aucune_image_.png', 'Chaque famille s\'organise (recettes, pratiques etc..). Une fois le four allumé, c\'est un tournus de qui l\'utilise. Le four a une capacité de 120 pains. Les fournées ont lieu deux fois par année, soit à la fin avril et à la fin novembre.', '', '')">Lire la suite</span></p>
+  </div>
+  <div class="image-bloc">
+    <p class="image-titre">Chez-les-Reuses</p>
+    <img src="images/fours/aucune_image_.png" alt="Image 5"
+         onclick="ouvrirPopup('images/fours/aucune_image_.png', 'Tout est distribué aux membres du consortage. Chaque consorts fait son pain et sa spécialité. Les fournées n\'ont pas de visées communautaires. Une fournée par année à lieu, au début novembre.', '', '')">
+    <p class="texte-preview">Tout est distribué aux membres du consortage. Chaque consort fait son pain et sa spécialité. Les fourn... <span class="lire-suite" onclick="ouvrirPopup('images/fours/aucune_image_.png', 'Tout est distribué aux membres du consortage. Chaque consorts fait son pain et sa spécialité. Les fournées n\'ont pas de visées communautaires. Une fournée par année à lieu, au début novembre.', '', '')">Lire la suite</span></p>
+  </div>
+  <div class="image-bloc">
+    <p class="image-titre">Commeire</p>
+    <img src="images/fours/aucune_image_.png" alt="Image 6"
+         onclick="ouvrirPopup('images/fours/aucune_image_.png', 'Le four est chauffé durant la semaine, puis la fournée a lieu le samedi, suivi d\'une raclette. La cuite au four banal est continué pour garder la tradition. Il y a seulement une recette de pain. Le pain est réservé à l\'avance (peu de vente directe). Les fournées ont lieu à la mi mai et la mi novembre.', '', '')">
+    <p class="texte-preview">Le four est chauffé durant la semaine, puis la fournée a lieu le samedi, suivi d'une raclette. La cuite... <span class="lire-suite" onclick="ouvrirPopup('images/fours/aucune_image_.png', 'Le four est chauffé durant la semaine, puis la fournée a lieu le samedi, suivi d\'une raclette. La cuite au four banal est continué pour garder la tradition. Il y a seulement une recette de pain. Le pain est réservé à l\'avance (peu de vente directe). Les fournées ont lieu à la mi mai et la mi novembre.', '', '')">Lire la suite</span></p>
+  </div>
+
+  <div class="image-bloc">
+    <p class="image-titre">Somlaproz</p>
+    <img src="images/fours/aucune_image_.png" alt="Image 7"
+         onclick="ouvrirPopup('images/fours/aucune_image_.png', 'Aucune info pour le moment', '', '')">
+    <p class="texte-preview">Aucune info pour le moment <span class="lire-suite" onclick="ouvrirPopup('images/fours/aucune_image_.png', 'Aucune info pour le moment', '', '')">Lire la suite</span></p>
+  </div>
+  <div class="image-bloc">
+    <p class="image-titre">Arlaches</p>
+    <img src="images/fours/aucune_image_.png" alt="Image 8"
+         onclick="ouvrirPopup('images/fours/aucune_image_.png', 'Aucune info pour le moment', '', '')">
+    <p class="texte-preview">Aucune info pour le moment <span class="lire-suite" onclick="ouvrirPopup('images/fours/aucune_image_.png', 'Aucune info pour le moment', '', '')">Lire la suite</span></p>
+  </div>
+  <div class="image-bloc">
+    <p class="image-titre">Biolley</p>
+    <img src="images/fours/aucune_image_.png" alt="Image 9"
+         onclick="ouvrirPopup('images/fours/aucune_image_.png', 'Aucune info pour le moment', '', '')">
+    <p class="texte-preview">Aucune info pour le moment <span class="lire-suite" onclick="ouvrirPopup('images/fours/aucune_image_.png', 'Aucune info pour le moment', '', '')">Lire la suite</span></p>
+  </div>
+
+  <div class="image-bloc">
+    <p class="image-titre">Verlonne</p>
+    <img src="images/fours/verlonne.jpg" alt="Image 10"
+         onclick="ouvrirPopup('images/fours/verlonne.jpg', 'Une fois par année, le consortage se réunit pour une journée de cuite. La cuite de pain est une raison de se rencontrer, et la tradition est perpétuer afin de garder ces moments hors temps, où tout ce qui compte est le partage.', '', '')">
+    <p class="texte-preview">Une fois par année, le consortage se réunit pour une journée de cuite. La cuite de pain est une raison... <span class="lire-suite" onclick="ouvrirPopup('images/fours/verlonne.jpg', 'Une fois par année, le consortage se réunit pour une journée de cuite. La cuite de pain est une raison de se rencontrer, et la tradition est perpétuer afin de garder ces moments hors temps, où tout ce qui compte est le partage.', '', '')">Lire la suite</span></p>
+  </div>
+  <div class="image-bloc">
+    <p class="image-titre">La Douay</p>
+    <img src="images/fours/aucune_image_.png" alt="Image 11"
+         onclick="ouvrirPopup('images/fours/aucune_image_.png', 'Aucune festivité n\'est organisé autour des fournées. La fournée annuelle a lieu mi octobre.', '', '')">
+    <p class="texte-preview">Aucune festivité n'est organisée autour des fournées. La fournée annuelle a lieu mi octobre. <span class="lire-suite" onclick="ouvrirPopup('images/fours/aucune_image_.png', 'Aucune festivité n\'est organisé autour des fournées. La fournée annuelle a lieu mi octobre.', '', '')">Lire la suite</span></p>
+  </div>
+
+</div>
+
+      <!-- SECTION 4 -->
+
+  <div class="section" id="section4">
+    <h2>Bagnes</h2>
+  </div>
+
+  <!-- GALERIE 9 IMAGES -->
+  <div class="gallery">
+
+  <div class="image-bloc">
+    <p class="image-titre">Vollèges</p>
+    <img src="images/fours/aucune_image_.png" alt="Image 1"
+         onclick="ouvrirPopup('images/fours/aucune_image_.png', 'Aucune info pour le moment', '', '')">
+    <p class="texte-preview">Aucune info pour le moment <span class="lire-suite" onclick="ouvrirPopup('images/fours/aucune_image_.png', 'Aucune info pour le moment', '', '')">Lire la suite</span></p>
+  </div>
+  <div class="image-bloc">
+    <p class="image-titre">Sarreyer</p>
+    <img src="images/fours/aucune_image_.png" alt="Image 2"
+         onclick="ouvrirPopup('images/fours/aucune_image_.png', 'Aucune info pour le moment', '', '')">
+    <p class="texte-preview">Aucune info pour le moment <span class="lire-suite" onclick="ouvrirPopup('images/fours/aucune_image_.png', 'Aucune info pour le moment', '', '')">Lire la suite</span></p>
+  </div>
+  <div class="image-bloc">
+    <p class="image-titre">Vens</p>
+    <img src="images/fours/vens.jpg" alt="Image 3"
+         onclick="ouvrirPopup('images/fours/vens.jpg', 'Les fournées ont lieu sur 2 jours. Une fête est organisée lors de la vente de pains réservés à l\'avance (environ 300 pains + 300 cressins). La cuite a lieu deux fois par années, à Noël et à la fête patronale du 15 juin (St-Bernard).', '', '')">
+    <p class="texte-preview">Les fournées ont lieu sur 2 jours. Une fête est organisée lors de la vente de pains réservés à l'avance... <span class="lire-suite" onclick="ouvrirPopup('images/fours/vens.jpg', 'Les fournées ont lieu sur 2 jours (vendredi après-midi à samedi). Une fête est organisée par une association du village lors de la vente de pains. Les pains sont souvent réservés à l\'avance (environ 300 pains + 300 cressins). La cuite a lieu deux fois par années, à Noël et à la fête patronale du 15 juin (St-Bernard).', '', '')">Lire la suite</span></p>
+  </div>
+
+  <div class="image-bloc">
+    <p class="image-titre">Levron</p>
+    <img src="images/fours/aucune_image_.png" alt="Image 4"
+         onclick="ouvrirPopup('images/fours/aucune_image_.png', 'Des cuites exceptionnelles sont réalisées lors d\'évènments spéciaux, tels que la Fête de chant du Bas-Valais. La capacité du four est de 50 pains (ou 60 cressins). Des cuites sont réalisées quatre fois par années, une cuite par saison (St-Jean, Noël, et deux autres dates variables) Si les pains et les cressins ne sont pas vendus en fin de journée, alors la laitrie d\'Etiez les vend pour eux.')">    <p class="texte-preview">Des cuites exceptionnelles sont réalisées lors d'événements spéciaux. La capacité du four est de 50 pains. Des cuites... <span class="lire-suite" onclick="ouvrirPopup('images/fours/aucune_image_.png', 'Des cuites exceptionnelles sont réalisées lors d\'évènnments spéciaux, tels que la Fête de chant du Bas-Valais. La capacité du four est de 50 pains (ou 60 cressins). Des cuites sont réalisées quatre fois par années, une cuite par saison (St-Jean, Noël, et deux autres dates variables) Si les pains et les cressins ne sont pas vendus en fin de journée, alors la laitrie d\'Etiez les vend pour eux.')">Lire la suite</span></p>  </div>
+  <div class="image-bloc">
+    <p class="image-titre">Cotterg</p>
+    <img src="images/fours/aucune_image_.png" alt="Image 5"
+         onclick="ouvrirPopup('images/fours/aucune_image_.png', 'Le four a une capacité de 75 pains. Ces derniers sont pétris à la main. Le pain est distribué...', '', '')">
+    <p class="texte-preview">Le four a une capacité de 75 pains. Ces derniers sont pétris à la main. Le pain est distribué... <span class="lire-suite" onclick="ouvrirPopup('images/fours/aucune_image_.png', 'Le four a une capacité de 75 pains. Ces derniers sont pétrit à la main. Le pain est distribué, et certaines personnes offrent le prix de la farine en échange.', '', '')">Lire la suite</span></p>
+  </div>
+  <div class="image-bloc">
+    <p class="image-titre">Versegères</p>
+    <img src="images/fours/aucune_image_.png" alt="Image 6"
+         onclick="ouvrirPopup('images/fours/aucune_image_.png', 'Chaque famille vient à tour de rôle et est responsable d\'entretenir le feu. Chaque famille passe commande...', '', '')">
+    <p class="texte-preview">Chaque famille vient à tour de rôle et est responsable d'entretenir le feu. Chaque famille passe commande... <span class="lire-suite" onclick="ouvrirPopup('images/fours/aucune_image_.png', 'Chaque famille vient à tour de rôle, et est responsable d\'entretenir le feu durant sa fournée. Une personne par famille aide pour nettoyage en fin de fournées. Chaque famille passe commande à la vice-présidente pour la quantité de farine ainsi que de cressins. Le four a une capacité 100 pains. Les cuites ont lieu en janvier, à Pâques, et en octobre. ', '', '')">Lire la suite</span></p>
+  </div>
+
+  <div class="image-bloc">
+    <p class="image-titre">Lourtier</p>
+    <img src="images/fours/lourtier.JPG" alt="Image 7"
+         onclick="ouvrirPopup('images/fours/lourtier.JPG', 'La pâte est préparée dans l\'ancienne école. La recette de pain vient de Vollèges. La capacité du four...', '', '')">
+    <p class="texte-preview">La pâte est préparée dans l'ancienne école. La recette de pain vient de Vollèges. La capacité du four... <span class="lire-suite" onclick="ouvrirPopup('images/fours/lourtier.JPG', 'La pâte est préparée dans ancienne école (sale bricolage mise à disposition par commune). La recette de pain vient de Vollèges. La capacité du four est de 100 pains.Les fournée sont lieu deux fois par année (St-Georges et automne). À ce moment, la Jeunesse de Lourtier organise un bar et raclette lors de la fournée. Les gens viennent acheter leurs pain à partir 11h-12h.', '', '')">Lire la suite</span></p>
+  </div>
+  <div class="image-bloc">
+    <p class="image-titre">La Crettaz</p>
+    <img src="images/fours/aucune_image_.png" alt="Image 8"
+         onclick="ouvrirPopup('images/fours/aucune_image_.png', 'Les pains cuits sont distribués gratuitement. Il y a parfois une cuite de polenta au four. Une fois par...', '', '')">
+    <p class="texte-preview">Les pains cuits sont distribués gratuitement. Il y a parfois une cuite de polenta au four. Une fois par... <span class="lire-suite" onclick="ouvrirPopup('images/fours/aucune_image_.png', 'Les pains cuits sont distribués gratuitement, et il y a parfois une cuite de polenta au four. Une fois par an, les écoles viennent faire une journée de pizza ou de pain. Le pain est pétri à la main quatre fois par années (Immaculé Conception, St-Joseph, Ascension, Fête du Village).', '', '')">Lire la suite</span></p>
+  </div>
+
+</div>
+ 
+    <!-- SECTION 5 -->
+
+  <div class="section" id="section5">
+    <h2>Trient</h2>
+  </div>
+
+<!-- GALERIE 2 COLONNES -->
+  <div class="gallery-2col">
+  <div class="image-bloc">
+    <p class="image-titre">Jeurs</p>
+    <img src="images/fours/aucune_image_.png" alt="Image 1"
+         onclick="ouvrirPopup('images/fours/aucune_image_.png', 'Le boulanger de Trient prépare les pains (environ 70), vendus 5.- pièce. Il y a une capacité de production de 130 pains, mais ils ont baissé la production. Le four est allumé le dimanche et chauffé doucement pour faire le pain le samedi suivant. La fournée à lieu lors de la fête patronale du 1er weekend d\'août.')">
+    <p class="texte-preview">Le boulanger de Trient prépare les pains (environ 70), vendus 5.- pièce. Le four est allumé... <span class="lire-suite" onclick="ouvrirPopup('images/fours/aucune_image_.png', 'Le boulanger de Trient prépare les pains (environ 70), vendus 5.- pièce. Il y a une capacité de production de 130 pains, mais ils ont baissé la production. Le four est allumé le dimanche et chauffé doucement pour faire le pain le samedi suivant. La fournée à lieu lors de la fête patronale du 1er weekend d\'août.')">Lire la suite</span></p>
+  </div>
+
+  <div class="image-bloc">
+    <p class="image-titre">Village</p>
+    <img src="images/fours/trient.jpeg" alt="Image 2"
+         onclick="ouvrirPopup('images/fours/trient.jpeg', 'Le boulanger de Trient prépare les pains (environ 70), vendus 5.- pièce. Il y a une capacité de production de 130 pains, mais ils ont baissé la production. Le four est allumé le dimanche et chauffé doucement pour faire le pain le samedi suivant. La fournée à lieu lors de la fête patronale du 1er weekend d\'août.')">
+    <p class="texte-preview">Le boulanger de Trient prépare les pains (environ 70), vendus 5.- pièce. Le four est allumé... <span class="lire-suite" onclick="ouvrirPopup('images/fours/trient.jpeg', 'Le boulanger de Trient prépare les pains (environ 70), vendus 5.- pièce. Il y a une capacité de production de 130 pains, mais ils ont baissé la production. Le four est allumé le dimanche et chauffé doucement pour faire le pain le samedi suivant. La fournée à lieu lors de la fête patronale du 1er weekend d\'août.')">Lire la suite</span></p>
+  </div>
+
+</div>
+
+    <!-- SECTION 6 -->
+  <div class="section" id="section6">
+    <h2>Finhaut</h2>
+  </div>
+<!-- GALERIE 1 IMAGES -->
+  <div class="gallery-1">
+  <div class="image-bloc">
+    <p class="image-titre">Finhaut</p>
+    <img src="images/fours/aucune_image_.png" alt="Image"
+         onclick="ouvrirPopup('images/fours/aucune_image_.png', 'Les pains sont préparés et précuits par un boulanger, puis finis et vendus au four à pain. Des pizzas sont préparés et vendus le midi (14-18.-).Au total, 180 pains et une centaine de pizzas par par le four banal lors de la cuite!', '', '')">
+    <p class="texte-preview">Les pains sont préparés et précuits par un boulanger, puis finis et vendus au four à pain. Des... <span class="lire-suite" onclick="ouvrirPopup('images/fours/aucune_image_.png', 'Les pains sont préparés et précuits par un boulanger, puis finis et vendus au four à pain. Des pizzas sont préparés et vendus le midi (14-18.-).Au total, 180 pains et une centaine de pizzas par par le four banal lors de la cuite!', '', '')">Lire la suite</span></p>
+  </div>
+</div>
+
+  <!-- SECTION 7 -->
+  <div class="section" id="section7">
+    <h2>Martigny</h2>
+  </div>
+<!-- GALERIE 1 IMAGES -->
+  <div class="gallery-1">
+  <div class="image-bloc">
+    <p class="image-titre">Chemin-Dessus</p>
+    <img src="images/fours/chemindessus.jpeg" alt="Image"
+         onclick="ouvrirPopup('images/fours/chemindessus.jpeg', 'La pâte est préparée dans un carnotzet (qui appartient aussi au consortage). La cuite a lieu deux fois par années, lors de la fête patronale d\'août et au nouvel an. Le four est également loué à une boulangère.')">
+    <p class="texte-preview">La pâte est préparée dans un carnotzet. La cuite a lieu deux fois par années, lors de la fête... <span class="lire-suite" onclick="ouvrirPopup('images/fours/chemindessus.jpeg', 'La pâte est préparée dans un carnotzet (qui appartient aussi au consortage). La cuite a lieu deux fois par années, lors de la fête patronale d\'août et au nouvel an. Le four est également loué à une boulangère.')">Lire la suite</span></p>
+  </div>
+</div>
+
+  <!-- SECTION 8 -->
+  <div class="section" id="section8">
+    <h2>Sembrancher</h2>
+  </div>
+<!-- GALERIE 1 IMAGES -->
+  <div class="gallery-1">
+  <div class="image-bloc">
+    <p class="image-titre">La Garde</p>
+    <img src="images/fours/aucune_image_.png" alt="Image"
+         onclick="ouvrirPopup('images/fours/aucune_image_.png', 'Les pains sont faits selon les commandes. Ensutie, un repas est cuit au four pour tous les membres. Les cuites ont lieu à Noël et à Pâques.', '', '')">
+    <p class="texte-preview">Les pains sont faits selon les commandes. Ensuite, un repas est cuit au four pour tous les... <span class="lire-suite" onclick="ouvrirPopup('images/fours/aucune_image_.png', 'Les pains sont faits selon les commandes. Ensutie, un repas est cuit au four pour tous les membres. Les cuites ont lieu à Noël et à Pâques.', '', '')">Lire la suite</span></p>
+  </div>
+</div>
+
+    <!-- SECTION 9 -->
+  <div class="section" id="section9">
+    <h2>Liddes</h2>
+  </div>
+<!-- GALERIE 1 IMAGES -->
+ <div class="gallery-2col">
+  <div class="image-bloc">
+    <p class="image-titre">La Chenoz</p>
+    <img src="images/fours/aucune_image_.png" alt="Image 1"
+         onclick="ouvrirPopup('images/fours/aucune_image_.png', 'Aucune info pour le moment', '', '')">
+    <p class="texte-preview">Aucune info pour le moment <span class="lire-suite" onclick="ouvrirPopup('images/fours/aucune_image_.png', 'Aucune info pour le moment', '', '')">Lire la suite</span></p>
+  </div>
+
+  <div class="image-bloc">
+    <p class="image-titre">Chandonne</p>
+    <img src="images/fours/aucune_image_.png" alt="Image 2"
+         onclick="ouvrirPopup('images/fours/aucune_image_.png', 'haque famille fait sa fournée (jusqu\'à 120 pains). Deux fournées sont effectuées pour la vente en août (fête du village). De plus, une fournée a lieu a la fin avril et fin décembre.')">    <p class="texte-preview">Chaque famille fait sa fournée (jusqu'à 120 pains). Deux fournées sont effectuées pour la vente... <span class="lire-suite" onclick="ouvrirPopup('images/fours/aucune_image_.png', 'haque famille fait sa fournée (jusqu\'\u00e0 120 pains). Deux fournées sont effectuées pour la vente en août (fête du village). De plus, une fournée a lieu a la fin avril et fin décembre.')">Lire la suite</span></p>  </div>
+
+</div>
+    <!-- SECTION 10 -->
+  <div class="section" id="section10">
+    <h2>Salvan</h2>
+  </div>
+<!-- GALERIE 2 COLONNES -->
+  <div class="gallery-2col">
+  <div class="image-bloc">
+    <p class="image-titre">Tretien</p>
+    <img src="images/fours/tretien.jpg" alt="Image 1"
+         onclick="ouvrirPopup('images/fours/tretien.jpg', 'Les pains sont cuits une fois par année. La pâte est préparée dans une maison près du four, cela change à chaque fournée. La journée de cuite se déroule une fois par année. Les pains sont enfournés le samedi à 11h, puis sorti vers 12h. Des pizzas cuisent ensuite afin d\'utiliser toute la chaleur du four. Enfin, des petites patisseries sont également cuite. En soirée, une raclette à lieu à l\'école. Le dimanche, une messe suivi de la mise en drapeau a lieu. Le week end de festivité se termine par un repas à l\'école.')">    <p class="texte-preview">Les pains sont cuits une fois par année. La pâte est préparée dans une maison près du four... <span class="lire-suite" onclick="ouvrirPopup('images/fours/tretien.jpg', 'Les pains sont cuits une fois par année. La pâte est préparée dans une maison près du four, cela change à chaque fournée. La journée de cuite se déroule une fois par année. Les pains sont enfurnés le samedi à 11h, puis sorti vers 12h. Des pizzas cuisent ensuite afin d\'utiliser toute la chaleur du four. Enfin, des petites patisseries sont également cuite. En soirée, une raclette à lieu à l\'\u00e9cole. Le dimanche, une messe suivi de la mise en drapeau a lieu. Le week end de festivité se termine par un repas à l\'\u00e9cole.')">Lire la suite</span></p>  </div>
+
+  <div class="image-bloc">
+    <p class="image-titre">Les Marécottes</p>
+    <img src="images/fours/marecottes.jpg" alt="Image 2"
+         onclick="ouvrirPopup('images/fours/marecottes.jpg', 'Les pains sont cuits une fois par année (parfois d\'autres dates sont ajoutés lors d\'occasion spéciales). Une fournée a lieu le vendredi soir et deux le samedi. Les pains sont faits et façonnés par la boulangerie Tramway à Martigny. Environ 280 pains sont produits, puis vendus (6frs) lors d\'une fête, avec des boissons également vendus. Des pizzas sont cuites après afin d\'utiliser la fin de la chaleur du four.')">
+    <p class="texte-preview">Les pains sont cuits une fois par année. Une fournée a lieu le vendredi soir et deux le samedi... <span class="lire-suite" onclick="ouvrirPopup('images/fours/marecottes.jpg', 'Les pains sont cuits une fois par année (parfois d\'autres dates sont ajoutés lors d\'occasion spéciales). Une fournée a lieu le vendredi soir et deux le samedi. Les pains sont faits et façonnés par la boulangerie Tramway à Martigny. Environ 280 pains sont produits, puis vendus (6frs) lors d\'une fête, avec des boissons également vendus. Des pizzas sont cuites après afin d\'utiliser la fin de la chaleur du four.')">Lire la suite</span></p>
+  </div>
+
+</div>
+    <!-- SECTION 11 -->
+  <div class="section" id="section11">
+    <h2>Bourg Saint-Pierre</h2>
+  </div>
+<!-- GALERIE 2 COLONNES -->
+  <div class="gallery-1">
+  <div class="image-bloc">
+    <p class="image-titre">Titre</p>
+    <img src="images/fours/aucune_image_.png" alt="Image"
+         onclick="ouvrirPopup('images/fours/aucune_image_.png', 'Aucune info pour le moment', '', '')">
+    <p class="texte-preview">Aucune info pour le moment <span class="lire-suite" onclick="ouvrirPopup('images/fours/aucune_image_.png', 'Aucune info pour le moment', '', '')">Lire la suite</span></p>
+  </div>
+</div>
+
+
+  <!-- POP-UP -->
+  <div class="overlay" id="overlay" onclick="fermerPopup(event)">
+    <div class="popup">
+      <span class="close" onclick="fermerPopup()">✕</span>
+      <img id="popup-img" src="" alt="">
+      <div id="popup-contenu"></div>
+    </div>
+  </div>
+
+  <!-- LIGHTBOX POUR LES IMAGES AGRANDIES -->
+  <div class="lightbox" id="lightbox" onclick="fermerLightbox(event)">
+    <span class="lightbox-close" onclick="fermerLightbox()">✕</span>
+    <img id="lightbox-img" src="" alt="" class="lightbox-img">
+  </div>
+
+  <script>
+    function ouvrirPopup(src, pratiques, evolution, evolutionImg) {
+      document.getElementById('popup-img').src = src;
+      
+      let contenuHTML = '';
+      
+      // Section Pratiques actuelles
+      if (pratiques) {
+        contenuHTML += `
+          <div class="popup-section">
+            <div class="popup-subtitle">Pratiques actuelles</div>
+            <div class="popup-content">${pratiques}</div>
+          </div>
+        `;
+      }
+      
+      // Section Évolution
+      contenuHTML += `
+        <div class="popup-section">
+          <div class="popup-subtitle">Évolution</div>
+          <div class="popup-content">${evolution || ''}</div>
+      `;
+      if (evolutionImg) {
+        contenuHTML += `<img src="${evolutionImg}" alt="Évolution" class="popup-evolution-img">`;
+      }
+      contenuHTML += `</div>`;
+      
+      document.getElementById('popup-contenu').innerHTML = contenuHTML;
+      document.getElementById('overlay').classList.add('active');
+      
+      // Ajouter les event listeners pour les images cliquables
+      setTimeout(() => {
+        ajouterEcouteursBoutonsImages();
+      }, 0);
+    }
+
+    function ajouterEcouteursBoutonsImages() {
+      // Image principale du pop-up
+      const popupImg = document.getElementById('popup-img');
+      if (popupImg) {
+        popupImg.onclick = function(e) {
+          e.stopPropagation();
+          ouvrirLightbox(this.src);
+        };
+      }
+      
+      // Images d'évolution
+      const evolutionImgs = document.querySelectorAll('.popup-evolution-img');
+      evolutionImgs.forEach(img => {
+        img.onclick = function(e) {
+          e.stopPropagation();
+          ouvrirLightbox(this.src);
+        };
+      });
+    }
+
+    function ouvrirLightbox(src) {
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox').classList.add('active');
+    }
+
+    function fermerLightbox(event) {
+      if (!event || event.target === document.getElementById('lightbox')) {
+        document.getElementById('lightbox').classList.remove('active');
+      }
+    }
+
+    function fermerPopup(event) {
+      if (!event || event.target === document.getElementById('overlay')) {
+        document.getElementById('overlay').classList.remove('active');
+      }
+    }
+  </script>
+
+
+
+
+
+</body>
+</html>
