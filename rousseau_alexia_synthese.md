@@ -78,8 +78,6 @@ Selon le cube de la géovisualisation (MacEachren, 1994), mon projet se situe ve
 
 **Figure 1 : Cube de la géovisualisaton**
 
-*LLM : requête pour insérer image dans un format précis; requête pour centrer l'image*
-
 </div>
 
 
@@ -116,9 +114,9 @@ Puis, en fonction des fours choisis, intégrer des informations précises sur ce
 
 </div>
 
-#### 3. Réalisation de la visualisation
+#### 3. Réflexions et processus de création
 
-##### 3.1 Réflexions sur StoryMaps
+##### 3.1 Réflexions sur la visualisation en StoryMaps
 
 Ma réflexion a évolué quant à l'intégration d'une carte de l'emplacement des fours. Au départ, j'ai cru bon d'insérer une carte avec l'emplacement de chacun des fours avec lesquels l'équipe s'est entretenue (voir figure 3). J'ai créé une carte dans Express Map (carte en ligne, créer à même la StoryMaps). Par contre, les options sont limités : 
 - la légende n'apparait pas directement quand tu défiles sur la carte (elle est cachée dans le coin en bas et on doit cliquer), 
@@ -155,13 +153,13 @@ Afin de classer les fours par communues, j'ai demandé à Claude.IA un code : Je
 Après réflexion sur la forme décrite ci-dessus, je trouvais que de seulement voir l'image et de devoir effectuer un clic (sans savoir qu'il était possible) n'était pas vraiment dans une visée d'accompagnation de l'utilisateur (figure 5). Ainsi, j'ai songé à ajouter le début de mon texte directement sous l'image, qui se terminerait par ... *Lire la suite*, d'une différente couleur (bleu pâle) insitant ainsi à cliquer. De plus, afin d'intégrer des informations (en guise de réponse aux questions), je vais intégrer une section Évolution, visible lors du clic, qui comprend la frise chronologique. Actuellement, lors du clic, seul un texte apparait et il serait bon de mieux structurer cette partie afin qu'elle soit plus compréhensible (figure 6).
 
 <div align="center">
-<img src="images/claude/img_fours.png" width="500" />
+<img src="images/claude/img_fours.png" width="300" />
 
 **Figure 5 : Mise en forme imprécise**
 </div>
 
 <div align="center">
-<img src="images/claude/img_popup.png" width="500" />
+<img src="images/claude/img_popup.png" width="300" />
 
 **Figure 6 : Manque de clarté dans le pop-up**
 </div>
@@ -169,7 +167,7 @@ Après réflexion sur la forme décrite ci-dessus, je trouvais que de seulement 
 Afin de mettre en oeuvre ces changements, j'ai demandé à ClaudeIA "je veux mettre le début (2 lignes) de chacun des textes directement sous l'image (texte actuellement seulement visible au pop-up), sur la page principale. Je veux que ce texte se termine par "lire la suite...", pour inciter le public à cliquer. Tu peux faire un test avec le premier élément (La Rosière)" Le résultat était satisfaisant (figure 7), mais j'ai fait une seconde requête afin de raccourcir le texte visible (140 à 120 caratctères, puis 50 caractères).
 
 <div align="center">
-<img src="images/claude/lire_la_suite.png" width="500" />
+<img src="images/claude/lire_la_suite.png" width="300" />
 
 **Figure 7 : Intégration Lire la suite**
 </div>
@@ -181,7 +179,7 @@ J'ai fait la requête à ClaudeIA "Voici un site web que j'ai créée. Pouvez vo
 1. Code (html, css et js) pour le bouton retour en haut
 1. Code (html, css) pour insérer une bannière qui structure la page. 
 
-J'ai ensuite demandé comment la carte pouvait être améliorer (comment est ce que je pourrais améliorer cette carte pour qu'elle soit plus compréhensible ?). Ses réponses contenaient des point d'améliorations concernant la légende (absente), le contexte géographique (absent), la symbologie (incompréhensible). J'ai ensuite retravaillé la carte sur QGIS et Affinity afin de produire une carte plus structurée.
+J'ai ensuite demandé comment la carte pouvait être améliorer (comment est ce que je pourrais améliorer cette carte pour qu'elle soit plus compréhensible ?). Ses réponses contenaient des point d'améliorations concernant la légende (absente), le contexte géographique (absent), la symbologie (incompréhensible). J'ai ensuite retravaillé la carte sur QGIS et Affinity afin de produire une carte plus structurée (figure 8).
 
 <div align="center">
 <img src="images/theorie/carte_q2.jpg" width="700" />
@@ -201,20 +199,43 @@ La visualisation comprend une carte statique mais avec des clics possible.
 
 La dernière partie comprend une liste de tous les fours présents. Les différentes sections représentent les communes. Ainsi, une certaine catégorisation peut être effectué, permettant de déceler des tendances.
 
-Chaque section comprend les différents fours actifs (allant de 1 à 11). 
+Chaque section comprend les différents fours actifs (allant de 1 à 11). Chaque four comprend une photo,puis une description des pratiques actuelles, suivi d'un espace pour insérer une frise. En revanche, ces sections ne sont pas complète pour chaque four. Seulement de four banal La Rosière (Orsières) comprend la frise chronologique. 
 
-#### 4.2 Évaluation de la visualisation
+La visualisation se lit comme une histoire, avec l'entierté des informations sur la même page. Certes, les espaces réservés à chaque fours sont cliquables, mais un X est présent afin d'être facilement refermable.
 
-*Évaluer l'efficience de l'interface*
-*Faciliter la tâche de l'utilisateur: faire des interfaces simples, mettre en évidence ce qui est important (prendre l'utilisateur à la main)*
+#### 4.2 Évaluation de la visualisation 
+
+Cette présente section permet une évaluation de la visualisation. L'évaluation est effectué en fonction de la visualisation finale (si chacune des sections présentes était remplie). Certes, par le fait qu'il reste encore quelques entretiens à effectuer et par manque de temps, la section Évolution de chaque four (frise chronologique) est incomplète.
+
 
 ##### 4.2.1 Points forts
 
+La visualisation réalisée répond partiellement aux objectifs (1. partager l'histoire des fours banals et 2. créer du lien). En effet, la visée communicationnelle du projet est atteinte. Le site web se lit comme un livre, et le fait que toutes les informations soient sur la même page permet une fluidité. De plus, bien qu'incomplet pour l'instant, les différentes rubriques insérés dans chaque fours permettent de partager les informations recueillies lors des 29 entretiens. 
+
+Concernant les questions, la visualisation répond encore une fois partiellement.
+
+<div align="center">
+
+| **Question** | **Intégration** | 
+|:-------|:-------|
+|Qu'est-ce qu'un four banal ? |Répondue en section : Une petite définition... |
+|Quel est l'implication historique des fours banals dans l'Entremont et la vallée du Trient ?| Répondue en section : Et pourquoi on en parle encore à ce jour ? |
+|Quelles sont les principales tendances d'évolution des fours banals dans l'Entremont et la vallée du Trient ?| Partiellement répondue. |
+|Quelles sont les pratiques actuelles des fours banals dans l'Entremont et la vallée du Trient ?| Répondue pour chaque four. |
+
+</div>
+
+En ce qui concerne l'efficience de la visualisation, elle est efficace. Elle permet une bonne compréhension de l'information, sans être complètement surchargée. Les titres et sous titres aident à mettre l'emphase sur ce qui est important.
+
 ##### 4.2.1 Points faibles
 
-Fours 
+Le second objectif, soit de créer du lien avec les fours, est partiellement atteint. Bien qu'il est possible de mieux comprendre les pratiques et l'évolution de chaque four, il n'y a pas de dispositif ou informations précises sur les contacts de chacun d'entre eux. Ainsi, la création de lien est moins atteinte.
 
-#### 4.3 Résultats des testes utilisateurs
+Comme mentionné au tableau ci-dessus, la question des tendances a été partiellement répondue. En effet, bien que les tendances seront perceptibles pour chaque four (section Évolution dans le pop-up), il n'y a pas nécessairement de tendances générales. 
+
+Une lacune concerne l'accessibilité à l'information sur les fours. Il aurait été pertinent d'ingérer l'information sans la nécessité du clic et pop-up, mais comme il y avait 29 fours à couvrir, j'ai opté pour une page plus courte, intégrant des clics.
+
+#### 4.3 Résultats des tests utilisateurs
 
 ### 5. Discussion et conclusion
 
@@ -229,9 +250,6 @@ https://lopanner.com/main/
 Les différentes requêtes à ClaudeIA ont été insérées tout au long du document. 
 Je certifie que ce sont les seules demandes qui ont été effectuées dans le cadre de ce projet. 
 Le reste des idées, textes et design sont le fruit de mon travail.
-
-Enfin, afin de publier ce document, j'ai effectué la requête à Claude.IA "Comment déposer un .md sur un serveur html avec github?"
-
 
 
 
