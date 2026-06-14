@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
   <title>Fours banals</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -40,6 +42,15 @@
       font-size: 1.8em;
       margin-bottom: 10px;
       color: #000000;
+    }
+
+    .section h3 {
+      font-size: 1.2em;
+      font-weight: bold;
+      color: #3B6E4A;
+      margin-top: 24px;
+      margin-bottom: 8px;
+      font-style: italic;
     }
 
     .section p {
@@ -212,8 +223,8 @@
 
 .point {
   position: absolute;
-  width: 16px;
-  height: 16px;
+  width: 12px;
+  height: 12px;
   background: #e74c3c;
   border: 2px solid white;
   border-radius: 50%;
@@ -312,97 +323,191 @@
   margin-top: 10px;
 }
 
+#retour-haut {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  padding: 10px 16px;
+  background-color: #3B6E4A;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  font-size: 0.9em;
+  font-family: Georgia, serif;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: 999;
+}
+
+#retour-haut.visible {
+  opacity: 1;
+}
+
+#retour-haut:hover {
+  background-color: #DCC4A4;
+  color: #333;
+}
+
+/* PHOTO PLEINE LARGEUR */
+.banniere {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  margin: 40px 0 0 0;
+}
+
+/* CHIFFRES CLÉS */
+.chiffres-cles {
+  background-color: #DCC4A4;
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  padding: 50px 30px;
+  flex-wrap: wrap;
+}
+
+.chiffre-bloc {
+  text-align: center;
+}
+
+.chiffre-nombre {
+  font-size: 3em;
+  font-weight: bold;
+  color: #3B6E4A;
+  display: block;
+}
+
+.chiffre-label {
+  font-size: 1em;
+  color: #444;
+  font-style: italic;
+  margin-top: 6px;
+  display: block;
+}
+
   </style>
 </head>
 <body>
 
   <!-- TITRE -->
   <div class="hero">
-    <h1>Les fours banals</h1>
+    <h1>Les fours banals (Entremont et vallée du Trient)</h1>
   </div>
 
   <!-- SECTION 1 -->
   <div class="section">
-    <p>Le présent projet découle d'un inventaire des pratiques effectué dans la région de l'Entremont et la vallée du Trient, fondé sur 29 entretiens. Il s'agit d'un projet réalisé par quatre étudiantes du Master en géographie, environnement et aménagement de l'Université de Lausanne. Le projet est mené en collaboraiton avec le Centre régional d'étude des populations alpines (CRPEA).
-    </p>
+    <h2>Contexte du projet</h2>
+    <p>Le présent projet découle d'un inventaire des pratiques effectué dans la région de l'Entremont et la vallée du Trient, fondé sur 29 entretiens. Il s'agit d'un projet réalisé par quatre étudiantes du Master en géographie, environnement et aménagement de l'Université de Lausanne. Le projet est mené en collaboraiton avec le Centre régional d'étude des populations alpines (CREPA).</p>
   </div>
 
   <!-- SECTION 1 -->
   <div class="section">
+    <h2>Une petite définition...</h2>
     <p>Les fours banals sont des fours à pains traditionnels, qui se retrouvent dans différents villages de montagne dans l'arc alpin. Ils font partis du patrimoine alimentaire alpin.</p>
   </div>
 
   <!-- SECTION 2 -->
   <div class="section">
     <h2>Et pourquoi on en parle encore à ce jour?</h2>
-    <p> Alors qu’ils relevaient de l’autorité seigneuriale au Moyen Âge, 
+
+  <h3>Depuis le Moyen Âge jusqu'à la modernité</h3>
+  <p>Alors qu’ils relevaient de l’autorité seigneuriale au Moyen Âge, 
       les fours banals et toute la culture de céréale en région de montagne avait une importance vitale 
       et représentait le coeur de la vie sociale. Ces pratiques sont organisés et rendus possibles grâce à des efforts 
-      communautaires majeurs, géré en bien communs. Les fours banal ont vu leur fonction diminué avec l'arrivée des chemins 
+      communautaires majeurs, géré en bien communs. </p>
+
+  <h3>Un déclin progressif au XIXe siècle</h3>
+  <p> Les fours banal ont vu leur fonction diminué avec l'arrivée des chemins 
       de fer et les grands changements liées à la modernisation des styles de vie (industrialisation, professionnalisation du
       métier de boulanger). À ce moment, des produits en provenance de l'extérieur de la Suisse arrivaient, et pour moins chers. 
       Cela a mené à une diminution des cultures de blés. Les fours banals qui ont su résister à ce changement sont les plus éloignés,
-       dans les régions difficiles d'accès. C'est seulement vers les années 80-90 que de nombreux fours ont été restaurés, et que les
+       dans les régions difficiles d'accès.</p>
+
+  <h3>Un renouveau depuis les années 80-90</h3>
+  <p> C'est seulement vers les années 80-90 que de nombreux fours ont été restaurés, et que les
         anciens consortages ont repris vie afin de rénover puis faire perdurer les savoirs. À ce jour, leur gestion est assurée par
          des consortages, associations ou confréries, qui  décident de leur entretien, de leur rénovation 
-         et de leur mise en valeur.
-    </p>
+         et de leur mise en valeur.</p>
   </div>
+
+  <!-- PHOTO BANNIÈRE -->
+<img src="images/carte/imgintro.jpg" alt="Four banal en activité" class="banniere">
+
+<!-- CHIFFRES CLÉS -->
+<div class="chiffres-cles">
+  <div class="chiffre-bloc">
+    <span class="chiffre-nombre">29</span>
+    <span class="chiffre-label">fours recensés</span>
+  </div>
+  <div class="chiffre-bloc">
+    <span class="chiffre-nombre">9</span>
+    <span class="chiffre-label">communes</span>
+  </div>
+  <div class="chiffre-bloc">
+    <span class="chiffre-nombre">29</span>
+    <span class="chiffre-label">entretiens réalisés</span>
+  </div>
+</div>
 
   <!-- SECTION 2 -->
   <div class="section">
-    <h2 style="text-align: center;">29 fours répartis dans 9 communes</h2>
+    <h2 style="text-align: center;">Où se situent ces fours actifs ?</h2>
    </div> 
 
 <!-- CARTE -->
 <div class="carte-container">
-  <img src="images/carte/carte.png" alt="Carte" class="carte-img">
+  <img src="images/carte/carte.svg" alt="Carte" class="carte-img">
 
   <!-- POINT 1 -->
-  <a href="#section3" class="point" style="top: 65%; left: 41%;">
+  <a href="#section3" class="point" style="top: 62%; left: 38%;">
     <span class="point-label">Orsières</span>
   </a>
 
   <!-- POINT 2 -->
-  <a href="#section4" class="point" style="top: 54%; left: 70%;">
+  <a href="#section4" class="point" style="top: 51%; left: 67%;">
     <span class="point-label">Bagnes</span>
   </a>
   <!-- POINT 3 -->
-  <a href="#section5" class="point" style="top: 47%; left: 26%;">
+  <a href="#section5" class="point" style="top: 43%; left: 26%;">
     <span class="point-label">Trient</span>
   </a>
 
   <!-- POINT 4 -->
-  <a href="#section6" class="point" style="top: 34%; left: 19%;">
+  <a href="#section6" class="point" style="top: 31%; left: 20%;">
     <span class="point-label">Finhaut</span>
   </a>
 
     <!-- POINT 5 -->
-  <a href="#section7" class="point" style="top: 22%; left: 39%;">
+  <a href="#section7" class="point" style="top: 20%; left: 39%;">
     <span class="point-label">Martigny</span>
   </a>
 
     <!-- POINT 6 -->
-  <a href="#section8" class="point" style="top: 32%; left: 51.5%;">
+  <a href="#section8" class="point" style="top: 29.5%; left: 50.5%;">
     <span class="point-label">Sembrancher</span>
   </a>
 
     <!-- POINT 7 -->
-  <a href="#section9" class="point" style="top: 59%; left: 53%;">
+  <a href="#section9" class="point" style="top: 56%; left: 53%;">
     <span class="point-label">Liddes</span>
   </a>
 
     <!-- POINT 8 -->
-  <a href="#section10" class="point" style="top: 23%; left: 18%;">
+  <a href="#section10" class="point" style="top: 20%; left: 20%;">
     <span class="point-label">Salvan</span>
   </a>
 
     <!-- POINT 9 -->
-  <a href="#section11" class="point" style="top: 82%; left: 56%;">
+  <a href="#section11" class="point" style="top: 78%; left: 54%;">
     <span class="point-label">Bourg Saint-Pierre</span>
   </a>
 
 </div>
+
+
 
     <!-- SECTION 3 -->
   <div class="section" id="section3"> 
@@ -783,7 +888,17 @@
 
     // Appliquer immédiatement (le script est en bas de la page)
     truncateTextBeforeLireSuite(50);
+
+    // Apparaît seulement après avoir scrollé 300px
+window.addEventListener('scroll', () => {
+  const btn = document.getElementById('retour-haut');
+  btn.classList.toggle('visible', window.scrollY > 300);
+});
+
   </script>
+
+
+  <button id="retour-haut" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑ Retour en haut</button>
 
 <footer style="
   background-color: #DCC4A4;
@@ -796,5 +911,8 @@
 ">
   © 2025 — Projet réalisé par <strong>Alexia Rousseau</strong> · Tous droits réservés
 </footer>
+
+
+
 </body>
 </html>

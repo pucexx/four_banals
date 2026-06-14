@@ -181,6 +181,7 @@ Afin de modifier le pop up, j'ai effectué la requête : "Je veux divisé le pop
 ##### 4.1 Description de la visualisation réalisée
 
 La visualisation a d'abord été conceptualisé et réalisé sous la forme d'une StoryMaps, une fonctionnalité de ArcGIS.  
+Ensuite, comme défini plus haut, le projet a été transféré en HTML. 
 
 #### 4.2 Évaluation de la visualisation
 
