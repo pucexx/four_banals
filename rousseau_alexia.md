@@ -1,7 +1,7 @@
 
 # **Géovisualisation de Alexia Rousseau, juin 2026**
 
-## **Titre de ma géovisualisation**
+## **Les fours banals (Entremont et vallée du Trient)**
 
 ### 1. Contexte du projet
 
@@ -142,11 +142,11 @@ Comme abordé ci-dessus, les premières idées d'éléments à intégrer ont ét
 En revanche, cette frise chronologique vient scinder l'enchainement naturel et intéressant de la Storymaps, en ajouter une lecture d'élément temporel horizontale dans le déroulement vertical. Ainsi, bien que j'avais déjà créé trois frises chronologiques, je ne sais toujours pas si je vais intégrer ces informations de cette façon.
 
 
-##### 3.2 Réfexions sur la planification du projet
+##### 3.2 Réfexions sur la visualisation en html
 
 J'avais commencé ma StoryMaps (prototype) en prenant des bribes de fichiers à gauche et à droite. Par contre, en créant ce document synthèse, j'ai rapidement réalisé qu'il serait préférable d'avoir un fichier de texte avec tous les éléments que je souhaite intégrer. Ainsi, le fichier [infos](infos) comprends les éléments de texte à intégrer dans ma visualisation, en fonction des tableaux définis en section 2.2.
 
-J'ai essayé de penser à une autre façon de partager l'information. Afin de tester autre chose, j'ai demandé à Claude.IA de créer un code avec la requête : "Je veux un code en html qui donne une page comme l'image (images/claude/demande_essai_html). Le but est d'avoir un titre, suivi de deux zones de texte, suivi d'un espace pour insérer des images (3 images une a côté de l'autre). Je veux pouvoir cliquer sur l'image, et qu'il y aille un pop-up qui apparaisse (et je puisse écrire une info)". Ensuite, d'autres requêtes ont suivi afin de peaufiner cette idée (Je veux ajouter au dessus de chacune des images un titre, centré sur l'image). J'ai ensuite ajouté et modifié ces codes. Le résultat de ce test est le document [ici](foursbanalsT1.html).
+J'ai essayé de penser à une autre façon de partager l'information. Afin de tester autre chose, j'ai demandé à Claude.IA de créer un code avec la requête : "Je veux un code en html qui donne une page comme l'image (images/claude/demande_essai_html). Le but est d'avoir un titre, suivi de deux zones de texte, suivi d'un espace pour insérer des images (3 images une a côté de l'autre). Je veux pouvoir cliquer sur l'image, et qu'il y aille un pop-up qui apparaisse (et je puisse écrire une info)". Ensuite, d'autres requêtes ont suivi afin de peaufiner cette idée (Je veux ajouter au dessus de chacune des images un titre, centré sur l'image).
 
 Dans la suite de ce document et afin de mieux comprendre ce dont il est question (géographiquement), j'ai songé à ajouté une carte au départ, avec des éléments cliquables qui mène à la commune précise. Ainsi, la requête : "Est-il possible, au début, d'insérer une carte avec des points cliquables ? et ces points pourraient référer aux différentes sections plus bas dans le document?" a été demandé à ClaudeIA. Sa réponse a suggéré l'intégration d'une carte statique, avec l'ajout de point. Ainsi, la question est désormais de trouver une carte assez précise pour situé l'utilisateur, tout en ne le surchargeant pas d'informations.
 
@@ -195,7 +195,13 @@ J'ai ensuite demandé comment la carte pouvait être améliorer (comment est ce 
 ##### 4.1 Description de la visualisation réalisée
 
 La visualisation a d'abord été conceptualisé et réalisé sous la forme d'une StoryMaps, une fonctionnalité de ArcGIS.  
-Ensuite, comme défini plus haut, le projet a été transféré en html. 
+Ensuite, comme défini plus haut, le projet a été transféré en html. La visualisation réalisée comprendre une courte description du contexte du projet, puis défini les fours banals. Ensuite, une section concernant l'importance historique est présente, en s'intéressant à l'évolution depuis le Moyen Âge. Dans un optique de structuration du site, une image ainsi qu'une bande "statistiques" sont présentes. 
+
+La visualisation comprend une carte statique mais avec des clics possible. 
+
+La dernière partie comprend une liste de tous les fours présents. Les différentes sections représentent les communes. Ainsi, une certaine catégorisation peut être effectué, permettant de déceler des tendances.
+
+Chaque section comprend les différents fours actifs (allant de 1 à 11). 
 
 #### 4.2 Évaluation de la visualisation
 
@@ -205,6 +211,8 @@ Ensuite, comme défini plus haut, le projet a été transféré en html.
 ##### 4.2.1 Points forts
 
 ##### 4.2.1 Points faibles
+
+Fours 
 
 #### 4.3 Résultats des testes utilisateurs
 
