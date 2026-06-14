@@ -176,12 +176,26 @@ Afin de mettre en oeuvre ces changements, j'ai demandé à ClaudeIA "je veux met
 
 Afin de modifier le pop up, j'ai effectué la requête : "Je veux divisé le pop up en plusieurs sections. Je veux avoir les sous-titres : Pratiques actuelles et Évolution. Le texte actuel se trouverait sous le sous-titre Pratiques actuelles. Sous le sous-titre Évolution, il y aurait place à insérer une image. Tu peux faire un test avec le four de la Rosière." Le résultat était satisfaisant, mais lors de l'ouverture du pop-up, la mise en page ne permettait pas de lire toute l'information, ni de défiler... J'ai essayé de mettre les images une à côté de l'autre, mais je n'aime pas mieux (lisibilité de la fris chronologique fiable). J'ai réalisé que le problème était le format de la frise. L'image n'était pas du tout cadré correctement. Je crois qu'en la cadrant correctement, elle sera lisible dans le format vertical du pop-up. J'ai ensuite demandé à ClaudeIA d'implémenter le même format pour tous les autres fours. Enfin, je trouvais que la frise n'était toujours pas très visible, j'ai demandé à ClaudeIA qu'elle soit clicable (pour la voir en plus grand). Et le background était noir, donc on voyait mal (car c'est un fichier sans fond - texte noir sur noir était problématique) et j'ai modifié le fond en blanc. Ensuite, j'ai rajouté une fonction que tous les pop ups sont du même format, et un scroll, afin d'uniformiser (avec une requête à ClaudeIA).
 
+J'ai fait la requête à ClaudeIA "Voici un site web que j'ai créée. Pouvez vous me faire des commentaires (contenu et format) ?". Ses réponses contenaient des améliorations quant au entretiens (non mis en valeur), à la partie introductive (longue) et au format (pas de bouton retour en haut, historique trop long, pas de coupure avec la carte). Ainsi, ClaudeIA a créé
+1. Code (html et css) pour les différentes sections de la partie historique
+1. Code (html, css et js) pour le bouton retour en haut
+1. Code (html, css) pour insérer une bannière qui structure la page. 
+
+J'ai ensuite demandé comment la carte pouvait être améliorer (comment est ce que je pourrais améliorer cette carte pour qu'elle soit plus compréhensible ?). Ses réponses contenaient des point d'améliorations concernant la légende (absente), le contexte géographique (absent), la symbologie (incompréhensible). J'ai ensuite retravaillé la carte sur QGIS et Affinity afin de produire une carte plus structurée.
+
+<div align="center">
+<img src="images/theorie/carte_q2.jpg" width="700" />
+
+**Figure 8 : Évolution de la carte**
+</div>
+
+
 #### 4. Visualisation réalisée
 
 ##### 4.1 Description de la visualisation réalisée
 
 La visualisation a d'abord été conceptualisé et réalisé sous la forme d'une StoryMaps, une fonctionnalité de ArcGIS.  
-Ensuite, comme défini plus haut, le projet a été transféré en HTML. 
+Ensuite, comme défini plus haut, le projet a été transféré en html. 
 
 #### 4.2 Évaluation de la visualisation
 
