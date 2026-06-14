@@ -26,6 +26,7 @@ Ainsi, la visualisation tente de répondre aux questions suivantes :
 #### 1.2 Importance de cette visualisation
 
 
+
 #### 1.3 Définition du public cible
 
 La définition du public cible est essentiel afin d'affiner la visualisation. De façon plus large, le public cible comprend des gens qui s'intéressent au four banal (membres d'associations, consortages), des gens qui veulent en apprendre sur les pratiques (nouvel·le habitant·e de la région), des historien·ne·s s'intéressant au patrimoine. 
@@ -83,7 +84,7 @@ Selon le cube de la géovisualisation (MacEachren, 1994), mon projet se situe ve
 
 La visualisation a pour but d'être un projet de communication, facile à lire et ludique. Le public se retrouvant sur la page, bien qu'intéressée, doit se faire attraper par la visualisation et souhaiter en apprendre davantage. Ainsi, l'esthétisme est important. De plus, afin d'attirer l'oeil, les couleurs sont importantes. Pour capter l'attention du lecteur, je souhaite également choisir minutieusement les informations à partager, en essayant d'avoir un minimum de diversité, tout en gardant une structure compréhensible. 
 
-Dans ce sens, la lisibilité et l'accessibilité sont tout autant importante. Comme cette visualisation sera partagés et promut lors d'une exposition, il est important qu'elle soit facilement visualisable sur un téléphone. Durant le processus de création de la Storymaps, il y a la possibilité de la visualiser sur téléphone (portrait et paysage). La visualisaiton doit également être lisible et intéressante en format web. Enfin, les tâches que l'utilisateur doit accomplir (lecture, visualisation de photos) doivent être facile à accomplir. Il ne devrait pas y avoir besoin d'indications (ou peu).  
+Dans ce sens, la lisibilité et l'accessibilité sont tout autant importante. Comme cette visualisation sera partagés et promut lors d'une exposition, il est important qu'elle soit facilement visualisable sur un téléphone. Durant le processus de création de la Storymaps, il y a la possibilité de la visualiser sur téléphone (portrait et paysage). La visualisaiton doit également être lisible et intéressante en format web. Enfin, les tâches que l'utilisateur·ice doit accomplir (lecture, visualisation de photos) doivent être facile à accomplir. Il ne devrait pas y avoir besoin d'indications (ou peu).  
 
 Le choix de la visualisation à l'aide d'une Storymaps est venu instinctivement dans l'optique où je souhaitais raconter une histoire et partager de l'informations. La forme souhaitée de type récit ou livret de communication se transpose bien sur la Storymaps. Cette fonctionnalité de ArcGIS permet de créer un récit numérique, en intégrant des cartes et images. D'autres fonctionnalités sont possibles, mais pour ce projet je me concentrerai sur ces deux options. En revanche, il est important de noter que les fonctionnalités de Storymaps sont restreintes. 
 
@@ -146,11 +147,11 @@ J'avais commencé ma StoryMaps (prototype) en prenant des bribes de fichiers à 
 
 J'ai essayé de penser à une autre façon de partager l'information. Afin de tester autre chose, j'ai demandé à Claude.IA de créer un code avec la requête : "Je veux un code en html qui donne une page comme l'image (images/claude/demande_essai_html). Le but est d'avoir un titre, suivi de deux zones de texte, suivi d'un espace pour insérer des images (3 images une a côté de l'autre). Je veux pouvoir cliquer sur l'image, et qu'il y aille un pop-up qui apparaisse (et je puisse écrire une info)". Ensuite, d'autres requêtes ont suivi afin de peaufiner cette idée (Je veux ajouter au dessus de chacune des images un titre, centré sur l'image).
 
-Dans la suite de ce document et afin de mieux comprendre ce dont il est question (géographiquement), j'ai songé à ajouté une carte au départ, avec des éléments cliquables qui mène à la commune précise. Ainsi, la requête : "Est-il possible, au début, d'insérer une carte avec des points cliquables ? et ces points pourraient référer aux différentes sections plus bas dans le document?" a été demandé à ClaudeIA. Sa réponse a suggéré l'intégration d'une carte statique, avec l'ajout de point. Ainsi, la question est désormais de trouver une carte assez précise pour situé l'utilisateur, tout en ne le surchargeant pas d'informations.
+Dans la suite de ce document et afin de mieux comprendre ce dont il est question (géographiquement), j'ai songé à ajouté une carte au départ, avec des éléments cliquables qui mène à la commune précise. Ainsi, la requête : "Est-il possible, au début, d'insérer une carte avec des points cliquables ? et ces points pourraient référer aux différentes sections plus bas dans le document?" a été demandé à ClaudeIA. Sa réponse a suggéré l'intégration d'une carte statique, avec l'ajout de point. Ainsi, la question est désormais de trouver une carte assez précise pour situé l'utilisateur·ice, tout en ne le surchargeant pas d'informations.
 
 Afin de classer les fours par communues, j'ai demandé à Claude.IA un code : Je veux un code qui ressemble au code pour les images cliquables (ci-dessus). J'ai besoin de : un code qui inclut 12 images (4 lignes de 3 images), un code de 9 images (3 lignes de 3 images),un code de 4 images (2 lignes de 2 images - centré) et un code de 1 image (centré). Le code ne donnait pas les images que je souhaitais, j'ai redemandé un code avec 4 lignes, 3 images par lignes. En ajoutant les images, j'ai réalisé que pour la commune d'Orsières, il y avait 11 fours (et non 12). J'ai demandé à Claude : "dans la section ORSIÈRES, je veux enlever le titre 12 (il n'y en a pas). Les deux autres images de cette ligne doivent être centrer." La même manipulation a été demandé pour Bagnes (8 fours au lieu de 9). De plus, j'ai demandé à Claude : "Est-ce possible dans le style de faire que les images sont toutes du même format ? Format 3:2." Et il a ajouté une règle CSS. De plus, les règles CSS étaient différentes pour différentes sections (ajout de différents codes et styles de façon ecclectiques au cours de la création de cette sections). J'ai demandé à Claude d'uniformiser les styles.
 
-Après réflexion sur la forme décrite ci-dessus, je trouvais que de seulement voir l'image et de devoir effectuer un clic (sans savoir qu'il était possible) n'était pas vraiment dans une visée d'accompagnation de l'utilisateur (figure 5). Ainsi, j'ai songé à ajouter le début de mon texte directement sous l'image, qui se terminerait par ... *Lire la suite*, d'une différente couleur (bleu pâle) insitant ainsi à cliquer. De plus, afin d'intégrer des informations (en guise de réponse aux questions), je vais intégrer une section Évolution, visible lors du clic, qui comprend la frise chronologique. Actuellement, lors du clic, seul un texte apparait et il serait bon de mieux structurer cette partie afin qu'elle soit plus compréhensible (figure 6).
+Après réflexion sur la forme décrite ci-dessus, je trouvais que de seulement voir l'image et de devoir effectuer un clic (sans savoir qu'il était possible) n'était pas vraiment dans une visée d'accompagnation de l'utilisateur·ice (figure 5). Ainsi, j'ai songé à ajouter le début de mon texte directement sous l'image, qui se terminerait par ... *Lire la suite*, d'une différente couleur (bleu pâle) insitant ainsi à cliquer. De plus, afin d'intégrer des informations (en guise de réponse aux questions), je vais intégrer une section Évolution, visible lors du clic, qui comprend la frise chronologique. Actuellement, lors du clic, seul un texte apparait et il serait bon de mieux structurer cette partie afin qu'elle soit plus compréhensible (figure 6).
 
 <div align="center">
 <img src="images/claude/img_fours.png" width="300" />
@@ -187,6 +188,7 @@ J'ai ensuite demandé comment la carte pouvait être améliorer (comment est ce 
 **Figure 8 : Évolution de la carte**
 </div>
 
+Enfin, j'ai ajouté des onglets en haut qui réfère aux communes, suite à la demande à Claude : "créer un code à intégrer qui permet d'avoir toutes les communes en haut, qui s'affiche en permanence". Cela permet de structurer et aussi de créer une structure du site, à même sa structure verticale de défilement, 
 
 #### 4. Visualisation réalisée
 
@@ -205,10 +207,10 @@ La visualisation se lit comme une histoire, avec l'entierté des informations su
 
 #### 4.2 Évaluation de la visualisation 
 
-Cette présente section permet une évaluation de la visualisation. L'évaluation est effectué en fonction de la visualisation finale (si chacune des sections présentes était remplie). Certes, par le fait qu'il reste encore quelques entretiens à effectuer et par manque de temps, la section Évolution de chaque four (frise chronologique) est incomplète.
+Cette présente section permet une évaluation de la visualisation. L'évaluation est effectué en fonction de la visualisation finale (si chacune des sections présentes était remplie). Par le fait qu'il reste encore quelques entretiens à effectuer et par manque de temps, la section Évolution de chaque four (frise chronologique) est incomplète, et il y a un grand manque de photos. Ces sections d'ici la fin du projet tutoré mentionné au début de ce document, seront complétés. 
 
 
-##### 4.2.1 Points forts
+#### 4.2.1 Points forts
 
 La visualisation réalisée répond partiellement aux objectifs (1. partager l'histoire des fours banals et 2. créer du lien). En effet, la visée communicationnelle du projet est atteinte. Le site web se lit comme un livre, et le fait que toutes les informations soient sur la même page permet une fluidité. De plus, bien qu'incomplet pour l'instant, les différentes rubriques insérés dans chaque fours permettent de partager les informations recueillies lors des 29 entretiens. 
 
@@ -225,11 +227,11 @@ Concernant les questions, la visualisation répond encore une fois partiellement
 
 </div>
 
-En ce qui concerne l'efficience de la visualisation, elle est efficace. Elle permet une bonne compréhension de l'information, sans être complètement surchargée. Les titres et sous titres aident à mettre l'emphase sur ce qui est important.
+En ce qui concerne l'efficience de la visualisation, elle est efficace. Elle permet une bonne compréhension de l'information, sans être complètement surchargée. Les titres et sous titres aident à mettre l'emphase sur ce qui est important. Selon moi, la tâche de l'utilisateur·ice est facile à accomplir, dans le sens que le but est de connaitre l'histoire (noté au départ), puis il est possible de déroulé vers les fours précis. Bien que l'information ne soit pas mentionné au départ, le menu horizontal avec les noms des communes permet de déduire que ces communes seront abordés. 
 
 
 
-##### 4.2.1 Points faibles
+#### 4.2.2 Points faibles
 
 Le second objectif, soit de créer du lien avec les fours, est partiellement atteint. Bien qu'il est possible de mieux comprendre les pratiques et l'évolution de chaque four, il n'y a pas de dispositif ou informations précises sur les contacts de chacun d'entre eux. Ainsi, la création de lien est moins atteinte.
 
@@ -237,7 +239,42 @@ Comme mentionné au tableau ci-dessus, la question des tendances a été partiel
 
 Une lacune concerne l'accessibilité à l'information sur les fours. Il aurait été pertinent d'ingérer l'information sans la nécessité du clic et pop-up, mais comme il y avait 29 fours à couvrir, j'ai opté pour une page plus courte, intégrant des clics.
 
-#### 4.3 Résultats des tests utilisateurs
+Concernant la carte, selon MacEachren (1995), la sémiologie utilisé pour représenté a une efficacité tirant davantage vers le moyen à faible. La saturation de couleur n'est pas la plus efficace, et je ne crois pas avoir utilisé les meilleures couleurs non plus. Bien que je voulais que ce soit esthétique, je crois que j'ai passé à côté d'une façon de transmettre l'informaitons claire. Je crois que que la carte permet de comprendre quels est la région à l'étude (les communes), mais la distinction entre les caractéristiques (fours actifs) des différentes communes est peu claire. De plus, l'ajout de point clicable, peut venir déjouer le lecteur et biaiser sa compréhension, comme la description ne se trouve pas dans la légende. L'idée de créer des points de différentes grosseurs pour pour représenter le nombre de four a également été songé, puisque cela se situe haut dans l'efficacité des variables visuelles (MacEachren, 1995), mais n'a pas été réalisé par manque de temps. Cela a créé une double symbologie sur la carte (symbol map et chloropleth map - Munzner, 2014)
+
+
+#### 4.2.3 Évaluation selon les personas
+
+Afin de comprendre si la visualisation est fonctionnelle, je vais réévaluer en fonction des besoins des personas créés plus tôt. La colonne **Satisfaction** a été ajouté.
+
+**Personas 1 : Jean (65 ans), retraité, peu de connaissance en informatique** 
+| **Caractéristiques** | **Objectifs** | **Attentes** | **Satisfaction**|
+|:-------|:-------|:-------|:-------|
+|Résident du village des Marécottes depuis qu'il est né  | Connaître ce qui est fait au four à pain du village du Trétien  | Informations historiques sur les fours | Introduction contextelle satisfaisante et accessible |
+| Membre de l'association des amies du four à pain de la Lenaire  | Partager des informations avec ses proches non-connaisseurs des FB |Plateforme simple d'usage, lisible et ludique |Carte statique interactive difficile d'usage, lien vers la vrai carte interactive difficile à manoeuvrer|
+
+**Personas 2 : Louise (29 ans), professeure à Martigny, bonne connaissance en informatque**
+|**Caractéristiques** |**Objectifs** |**Attentes** | **Satisfaction**|
+|:-------|:-------|:-------|:-------|
+|Habite en Valais depuis 5 ans  | Connaître l'histoire des fours banals de la région | Informations historiques sur les fours| Informations historiques présentes|
+|Intéressée par le patrimoine alimentaire valaisan  | Organiser une excursion avec ses élèves afin de visiter un four banal | Contenu vulgarisé et présence d'images | Contenu vulgarisé et accessible, mais manque d'information précise concernant les fournées (impossibilité de planifier une excursion) |
+
+**Personas 3 : Nelly (55 ans), historienne, bonne connaissance en informatique**
+|**Caractéristiques**|**Objectifs**|**Attentes**|**Satisfaction**|
+|:-------|:-------|:-------|:-------|
+|Habite en Valais depuis 10 ans | S'intéresse à la gouvernance des fours | Localisation précise des fours | Localisation complexe à trouver (suivre un autre lien) |
+|Spécialiste du patrimoine valaisan  | Informations historiques afin de rédiger un article sur le patrimoine alimentaire | Présence d'image de qualité | Présence d'image, mais peu varié et seulement une par fours | 
+
+**Personas 4 : Julian (34 ans), travailleur saisonnier, bonne connaissance en informatique**
+| **Caractéristiques** | **Objectifs** | **Attentes** |**Satisfaction**|
+|:-------|:-------|:-------|:-------|
+|Habite en Valais depuis 1 ans |En apprendre sur les fours banals|Visualisation mémorable et compréhensible| Visualisation compréhensible facilement|
+|Curieux de s'imprégner de la culture de son domicile  | Comprendre l'importance des fours dans l'histoire du village |Informations sur la participation |Informations sur la participation et les moments (imprécis) de fournées|
+
+Pour conclure, les utilisateurs·ices fictif ves sont partiellement satisfait·es de la visualisation. Les visées communicationnelles et historiques sont présentes, mais des informations très précises sur les fours sont manquantes (quand précisement sont les fournées, qui contacter), venant diminué la satisfaction d'un public historien. De plus, les modalités et foncitonnalités de la carte, et le lien vers une seconde carte, sont difficiles d'usage. 
+
+#### 4.3 Résultats des tests utilisateurs·ices
+
+
 
 ### 5. Discussion et conclusion
 
@@ -245,7 +282,9 @@ Une lacune concerne l'accessibilité à l'information sur les fours. Il aurait �
 
 MacEachren, A. M. (1994). Visualization in Modern Cartography: Setting the Agenda. In Modern Cartography Series (Ced., pp. 1-12). (Modern Cartography Series; Vol. 2, No. C). DOI:10.1016/B978-0-08-042415-6.50008-9 
 
-https://lopanner.com/main/ 
+MacEachren, A. (1995). How maps work: Representation, Visualization & Design. Guildford Press.
+
+Munzner, T. (2014). Chapter 8. Spatial Data I: Geographic Maps. Visualization Analysis and Design. A K Peters/CRC Press
 
 ### Déclaration d'intelligence artificielle
 
