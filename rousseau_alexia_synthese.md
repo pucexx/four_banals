@@ -227,6 +227,8 @@ Concernant les questions, la visualisation répond encore une fois partiellement
 
 En ce qui concerne l'efficience de la visualisation, elle est efficace. Elle permet une bonne compréhension de l'information, sans être complètement surchargée. Les titres et sous titres aident à mettre l'emphase sur ce qui est important.
 
+
+
 ##### 4.2.1 Points faibles
 
 Le second objectif, soit de créer du lien avec les fours, est partiellement atteint. Bien qu'il est possible de mieux comprendre les pratiques et l'évolution de chaque four, il n'y a pas de dispositif ou informations précises sur les contacts de chacun d'entre eux. Ainsi, la création de lien est moins atteinte.
